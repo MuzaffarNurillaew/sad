@@ -18,12 +18,17 @@ SECTIONS := 0-business-case.md \
 
 BUILD := build
 
-.PHONY: all setup reference report clean distclean
+.PHONY: all setup reference report check clean distclean
 
 all: report
 
 report: $(BUILD)/report.docx
 	@echo "Compiled report: $(BUILD)/report.docx"
+
+# "run-tests" step: deterministic checks only (word limits, diagram presence).
+# Depends on combined.md so a PlantUML syntax error fails this too.
+check: $(BUILD)/combined.md
+	$(PYTHON) scripts/check_section.py
 
 setup: $(PANDOC) $(PLANTUML) .venv/deps-installed
 
