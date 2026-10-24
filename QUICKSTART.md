@@ -43,7 +43,7 @@ Do these steps in this exact order. Do not skip step 4 or step 5/6.
 Open `resources/md/Coursework-01-group-v2.md`. Find the `## Requirements` numbered item and the matching row in the `# Assessment criteria/marking scheme` table for each of your two files. That row is exactly what you're being graded against — nothing else.
 
 **2. Write your content directly into your two files.**
-No Word, no Google Docs, no draw.io file — write in the `.md` file itself. Keep the existing `# Heading` line at the top.
+No Word, no Google Docs, no draw.io file — write in the `.md` file itself. Keep the existing `# Heading` line at the top. The brief requires analytical writing, not descriptive/explainy text — run the `/analytical-writing` skill on your draft before moving on (or just ask Claude to "apply the analytical-writing skill to this section").
 
 **3. If your file needs a diagram, write it as a PlantUML code block,** exactly in this form:
 
