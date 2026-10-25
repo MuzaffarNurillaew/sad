@@ -6,6 +6,20 @@ This repo is a 4-person group's coursework report for **Systems Analysis and Des
 
 A **broiler (poultry) farm** — a real local business (the repo owner's brother's farm), not a hypothetical case. The brief requires an existing local company; virtual/non-local businesses score 0.
 
+## As-is now, to-be only at the end — don't invent a fake IT system
+
+The farm has **no existing IT system** — just a paper notebook, the generic pDaftar bookkeeping app, Telegram contacts, phone calls, and cameras feeding a monitoring app. The module's own tutorial cases (Thredz, Fresco, Natlib) all happen to already have a PC system, which can make it look like sections 2–6 require one too. They don't — the brief resolves this explicitly:
+
+> "You will need to carry out analysis of the business and document any existing system(s)." (Description)
+> "...identify five functional and five non-functional requirements for **the information system**." (Requirements item 8, emphasis added)
+
+"System" doesn't mean "computer system" — a manual process (who does what, with what paper/phone/app) is a system in SAD terms, and it's the one that actually exists here. So:
+
+- **Sections 2–6 (Use Case Diagram, Use Cases, DFD, Activity Diagram, Sequence Diagram) model the real manual process as it is today.** Actors/processes/data stores should be the real things: Director, Worker, Bazaar Agent as actors; the paper notebook and pDaftar app as data stores; "weigh sample batch," "cull sick chicks," "log feed use" as processes/activities. Do not invent a fictional computer system to make the diagrams look more "IT-like" — that would be documenting something that doesn't exist, not analysis.
+- **Section 7 (Requirements Catalogue) is the one place that pivots to a proposed system.** Item 8 explicitly asks for requirements "for the information system" — this is where the group proposes a new/improved information system, and its functional/non-functional requirements should trace directly back to the real gaps already documented in the business case: no centralized tracker linking notebook/app/camera, approximate mortality counts, no price history, informal Telegram/phone-based procurement and slaughter scheduling.
+
+If a section 2–6 diagram feels like it needs a "system" that doesn't exist yet, that's a sign the diagram is drifting into to-be territory too early — pull it back to what actually happens today, and save the proposal for section 7.
+
 ## Who's doing what
 
 | Student | Files | Section |
