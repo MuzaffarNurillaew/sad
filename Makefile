@@ -3,7 +3,9 @@ PANDOC_URL := https://github.com/jgm/pandoc/releases/download/$(PANDOC_VERSION)/
 PLANTUML_VERSION := 1.2024.8
 PLANTUML_URL := https://github.com/plantuml/plantuml/releases/download/v$(PLANTUML_VERSION)/plantuml-$(PLANTUML_VERSION).jar
 
-PANDOC := tools/bin/pandoc
+# Prefer a pandoc already on PATH (e.g. Homebrew on macOS); the download
+# below is a linux-amd64 binary and only used as a fallback.
+PANDOC := $(or $(shell command -v pandoc 2>/dev/null),tools/bin/pandoc)
 PLANTUML := tools/plantuml.jar
 PYTHON := .venv/bin/python
 
