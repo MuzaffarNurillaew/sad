@@ -18,6 +18,19 @@ from pathlib import Path
 FENCE_RE = re.compile(r"```plantuml\n(.*?)\n```\n?", re.DOTALL)
 
 
+def with_smetana_layout(source: str) -> str:
+    """Force PlantUML's pure-Java Smetana layout engine instead of Graphviz's
+    `dot`, which isn't installed and never will be (no-sudo pipeline). Only
+    dot-based diagrams (use case, class, etc.) actually need this; sequence
+    diagrams ignore the pragma harmlessly."""
+    lines = source.split("\n")
+    for i, line in enumerate(lines):
+        if line.strip().startswith("@startuml"):
+            lines.insert(i + 1, "!pragma layout smetana")
+            break
+    return "\n".join(lines)
+
+
 def render_diagram(source: str, diagrams_dir: Path, plantuml_jar: Path) -> Path:
     digest = hashlib.sha1(source.encode("utf-8")).hexdigest()[:12]
     puml_path = diagrams_dir / f"diagram-{digest}.puml"
@@ -27,14 +40,18 @@ def render_diagram(source: str, diagrams_dir: Path, plantuml_jar: Path) -> Path:
         return png_path
 
     diagrams_dir.mkdir(parents=True, exist_ok=True)
-    puml_path.write_text(source, encoding="utf-8")
+    puml_path.write_text(with_smetana_layout(source), encoding="utf-8")
 
     result = subprocess.run(
         ["java", "-jar", str(plantuml_jar), "-tpng", "-charset", "UTF-8", str(puml_path)],
         capture_output=True,
         text=True,
     )
-    if result.returncode != 0 or not png_path.exists():
+    # PlantUML can exit 0 and still write a PNG after a failure (e.g. missing
+    # Graphviz `dot`) by baking the error message into the image itself as
+    # if it were the diagram - so a clean returncode + an existing file is
+    # not sufficient evidence of success; stderr must be clean too.
+    if result.returncode != 0 or not png_path.exists() or result.stderr.strip():
         sys.exit(
             f"PlantUML failed to render a diagram (source saved at {puml_path}):\n"
             f"{result.stdout}\n{result.stderr}"
