@@ -1,7 +1,10 @@
 ' Use case diagram for section 2 (2-use-case-diagram.md).
 ' Rendered with Graphviz dot, not the pipeline's smetana engine, which cannot lay out
-' 22 use cases legibly. Re-render after editing:
+' 24 use cases legibly. Re-render after editing:
 '   java -jar tools/plantuml.jar -tpng diagrams/use-case-diagram.puml   (needs Graphviz 'dot')
+' Layout note: the dead-chick extend is written `RD ..> CH` on purpose. Written as `CH <.. RD`,
+' Report Dead Chicks moves to the far column and several Director lines loop outside the boundary;
+' as written, every line stays inside but the Worker -> Check Houses line is long. Compare both renders before flipping.
 @startuml
 left to right direction
 skinparam packageStyle rectangle
@@ -17,7 +20,7 @@ actor "Bazaar Agent" as BA
 actor "Nurata Seller" as NS
 actor "Shop Customer" as SHC
 rectangle "Nurota Halol Parranda: current operations" {
-  usecase "Check Houses" as CH
+  usecase "Check Houses\n--\nextension points\ndead chick found" as CH
   usecase "Report Dead Chicks" as RD
   usecase "Log Feed Use" as LF
   usecase "Write in Notebook" as NB
@@ -27,27 +30,30 @@ rectangle "Nurota Halol Parranda: current operations" {
   usecase "Slaughter Client Order" as SC
   usecase "Decide Main Slaughter Date" as DS
   usecase "Weigh Sample Birds" as WS
-  usecase "Postpone Slaughter" as PS
   usecase "Run Main Slaughter" as MS
   usecase "Order Day-Old Chicks" as OC
+  usecase "Deliver Day-Old Chicks" as DC
   usecase "Order Feed and Vitamins" as OF
-  usecase "Pay Supplier by Bank Transfer" as PY
+  usecase "Deliver Feed and Vitamins" as DF
+  usecase "Pay Supplier at Batch End" as PY
   usecase "Pay Slaughter Crew per Head" as PC
   usecase "Record in pDaftar" as PD
   usecase "Calculate Batch Profit" as CP
   usecase "Arrange Delivery" as AD
   usecase "Sell Meat" as SM
+  usecase "Sell Meat to Bazaar Agent" as SMBA
   usecase "Agree Price per kg" as AP
   usecase "Send Weight Photo by Telegram" as WP
 }
 WK -- CH
-WK -- RD
 WK -- SC
+WK -- RD
 DIR -- RD
 DIR -- LF
 DIR -- MC
 DIR -- OC
 DIR -- OF
+DIR -- PY
 DIR -- SC
 DIR -- CS
 DIR -- TF
@@ -57,25 +63,28 @@ DIR -- PC
 DIR -- AD
 DIR -- SM
 DIR -- CP
+RD ..> CH : <<extend>>\n{dead chick found}
 RD ..> NB : <<include>>
 LF ..> NB : <<include>>
-OC ..> PY : <<include>>
-OF ..> PY : <<include>>
-PY .> PD : <<include>>
+PY ..> PD : <<include>>
 PC ..> PD : <<include>>
 AD ..> PD : <<include>>
 SM ..> PD : <<include>>
-CP ..> PD : <<include>>
 DS ..> WS : <<include>>
-DS <.. PS : <<extend>>\n{sample average below sale weight}
-SM <.. AP : <<extend>>\n{buyer is the Bazaar Agent}
-SM <.. WP : <<extend>>\n{buyer is the Bazaar Agent}
+SM <|-- SMBA
+SMBA ..> AP : <<include>>
+SMBA ..> WP : <<include>>
 CSUP -- OC
+CSUP -- DC
+CSUP -- PY
 FSUP -- OF
+FSUP -- DF
+FSUP -- PY
 CREW -- MS
 CREW -- PC
 BUY -- SM
-BA -- WP
+BUY -- SC
+BA -- SMBA
 BUY <|-- BA
 BUY <|-- NS
 BUY <|-- SHC
