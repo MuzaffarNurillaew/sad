@@ -1,3 +1,204 @@
 # Use Cases
 
 <!-- Rubric: resources/md/Coursework-01-group-v2.md, Requirements item 4 (15 points). Four use cases from the diagram in 2-use-case-diagram.md. -->
+
+<!--
+Generated tables: grid tables so numbered steps survive into the docx. Names and actors must match 2-use-case-diagram.md.
+Facts beyond 0-business-case.md come from Muzaffar's confirmed answers (see the comment in 2-use-case-diagram.md).
+To confirm with Muzaffar:
+- UC-03 extension 8a: are several main-slaughter sessions needed per batch? (1,000-1,200 birds/session vs 5,000-10,000 birds/house; section 5 assumes yes)
+- UC-04: how do the Nurata seller and shop customers receive the meat and pay? Who weighs their meat?
+- UC-01: is the supplier paid before or after delivery? Who receives the chicks at the farm?
+- UC-02: who weighs the sample birds? (sections 4-5 say the Director; not yet in 0-business-case.md)
+- More real exceptions would raise the "detailed" mark: chicks arriving short or dead (UC-01), crew unavailable when called (UC-02), head count disputed (UC-03), a buyer paying late or short (UC-04). Only add them if they actually happen.
+-->
+
+These four use cases follow the farm's cycle from buying a batch to selling it, and each carries a decision that moves money: what a batch costs (UC-01), when it is sold (UC-02), what processing costs (UC-03) and what it earns (UC-04). Together they cover every actor in Figure 2.1 except the Feed Supplier and the Worker. A feed order follows the same contract, bank-transfer and pDaftar steps as UC-01, so a separate table would repeat it. The Worker's three use cases are left out because the business case records that they happen but not the steps or alternatives within them, so their flows could not be documented without inventing detail. The Postconditions rows make the record-keeping gap concrete: every money step ends in pDaftar, while the butcher's head count in UC-03 and the per-kg price agreed with the Bazaar Agent in UC-04 exist only as verbal agreements.
+
+
+**UC-01: Order Day-Old Chicks**
+
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Number**      | UC-01                                                              |
++--------------------------+--------------------------------------------------------------------+
+| **Application**          | Nurota Halol Parranda current operations: procurement (Figure 2.1) |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Name**        | Order Day-Old Chicks                                               |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Description** | The Director orders a new batch of day-old chicks for one house    |
+|                          | from a chick supplier in Samarkand or Tashkent, under a standing   |
+|                          | contract paid by bank transfer. The order size matches the house's |
+|                          | capacity of 5,000–10,000 birds, and each house is re-ordered       |
+|                          | roughly every 60 days, only once it has been cleaned after the     |
+|                          | previous batch. The payment is the part of the order that reaches  |
+|                          | pDaftar.                                                           |
++--------------------------+--------------------------------------------------------------------+
+| **Primary Actor**        | Director (secondary: Chick Supplier)                               |
++--------------------------+--------------------------------------------------------------------+
+| **Precondition**         | A standing supply contract with the chick supplier is in place.    |
++--------------------------+--------------------------------------------------------------------+
+| **Postconditions**       | Day-old chicks matching the house's capacity have been delivered   |
+|                          | by Damas van. The supplier has been paid by bank transfer and the  |
+|                          | payment is recorded in pDaftar.                                    |
++--------------------------+--------------------------------------------------------------------+
+| **Trigger**              | A house has been emptied at the end of its previous batch.         |
++--------------------------+--------------------------------------------------------------------+
+| **Basic Flow**           | 1. The Director confirms that the house has been cleaned and       |
+|                          |    prepared.                                                       |
+|                          | 2. The Director sets the order size from the house's               |
+|                          |    5,000–10,000-bird capacity.                                     |
+|                          | 3. The Director places the order with the contracted supplier in   |
+|                          |    Samarkand or Tashkent.                                          |
+|                          | 4. The Director pays the supplier by bank transfer (includes Pay   |
+|                          |    Supplier by Bank Transfer).                                     |
+|                          | 5. The payment is recorded in pDaftar (Pay Supplier by Bank        |
+|                          |    Transfer includes Record in pDaftar).                           |
+|                          | 6. The supplier delivers the chicks to the farm by Damas van.      |
++--------------------------+--------------------------------------------------------------------+
+| **Extensions (Alternate  | 1a. The house is not yet cleaned: the order waits until cleaning   |
+| Flows)**                 | is finished, then the flow resumes at step 1.                      |
++--------------------------+--------------------------------------------------------------------+
+
+
+**UC-02: Decide Main Slaughter Date**
+
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Number**      | UC-02                                                              |
++--------------------------+--------------------------------------------------------------------+
+| **Application**          | Nurota Halol Parranda current operations: slaughter and sales      |
+|                          | (Figure 2.1)                                                       |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Name**        | Decide Main Slaughter Date                                         |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Description** | Near the end of a batch's 40–50-day growth period, the Director    |
+|                          | decides when to call in the hired slaughter crew. A sample of      |
+|                          | about ten birds is weighed, and from their average weight the      |
+|                          | Director decides whether to call the crew now or wait three to     |
+|                          | five more days, since growth slows after that point. The decision  |
+|                          | rests on one small sample and the Director's experience.           |
++--------------------------+--------------------------------------------------------------------+
+| **Primary Actor**        | Director                                                           |
++--------------------------+--------------------------------------------------------------------+
+| **Precondition**         | The batch is near the end of its growth period, and the early      |
+|                          | thinning of roughly 4,000 birds around day 35–40 has taken place.  |
++--------------------------+--------------------------------------------------------------------+
+| **Postconditions**       | Either the slaughter crew has been called in, or the decision has  |
+|                          | been deferred by three to five days.                               |
++--------------------------+--------------------------------------------------------------------+
+| **Trigger**              | The batch approaches the end of its 40–50-day growth period.       |
++--------------------------+--------------------------------------------------------------------+
+| **Basic Flow**           | 1. A sample of about ten birds is taken from the house.            |
+|                          | 2. The sample is weighed and its average weight worked out         |
+|                          |    (includes Weigh Sample Birds).                                  |
+|                          | 3. The Director judges from the average that the birds have        |
+|                          |    reached sale weight.                                            |
+|                          | 4. The Director calls in the hired crew immediately, starting      |
+|                          |    UC-03 Run Main Slaughter.                                       |
++--------------------------+--------------------------------------------------------------------+
+| **Extensions (Alternate  | 3a. The sample average is below sale weight (Postpone Slaughter    |
+| Flows)**                 | «extend»s this use case): the Director waits three to five more    |
+|                          | days, since growth slows after that point, and the flow resumes at |
+|                          | step 4.                                                            |
++--------------------------+--------------------------------------------------------------------+
+
+
+**UC-03: Run Main Slaughter**
+
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Number**      | UC-03                                                              |
++--------------------------+--------------------------------------------------------------------+
+| **Application**          | Nurota Halol Parranda current operations: slaughter and sales      |
+|                          | (Figure 2.1)                                                       |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Name**        | Run Main Slaughter                                                 |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Description** | A hired crew of about six slaughters and processes the batch       |
+|                          | overnight, divided by task: a butcher kills each bird, a scalder   |
+|                          | loosens its feathers in hot water, a plucker removes them, and two |
+|                          | to three workers clean the internal organs. The crew processes     |
+|                          | 1,000–1,200 birds a session. The butcher is paid per head, at a    |
+|                          | count agreed verbally with the Director and never written down, so |
+|                          | the figure that sets his pay cannot be checked afterwards.         |
++--------------------------+--------------------------------------------------------------------+
+| **Primary Actor**        | Slaughter Crew (secondary: Director)                               |
++--------------------------+--------------------------------------------------------------------+
+| **Precondition**         | UC-02 Decide Main Slaughter Date has concluded that the batch is   |
+|                          | ready for slaughter.                                               |
++--------------------------+--------------------------------------------------------------------+
+| **Postconditions**       | One session's birds (1,000–1,200) have been slaughtered, plucked   |
+|                          | and cleaned, ready for UC-04 Sell Meat, and the butcher's head     |
+|                          | count has been agreed verbally.                                    |
++--------------------------+--------------------------------------------------------------------+
+| **Trigger**              | The Director calls in the hired crew.                              |
++--------------------------+--------------------------------------------------------------------+
+| **Basic Flow**           | 1. The crew arrives for an overnight session.                      |
+|                          | 2. The butcher kills each bird.                                    |
+|                          | 3. The scalder loosens the feathers in hot water.                  |
+|                          | 4. The plucker removes the feathers.                               |
+|                          | 5. Two to three crew workers clean the internal organs.            |
+|                          | 6. The butcher counts the birds slaughtered during the session.    |
+|                          | 7. The Director and the butcher agree the count verbally.          |
+|                          | 8. The session is followed by Pay Slaughter Crew per Head, in      |
+|                          |    which the butcher is paid on the agreed count and the payment   |
+|                          |    is recorded in pDaftar.                                         |
++--------------------------+--------------------------------------------------------------------+
+| **Extensions (Alternate  | 8a. Birds remain in the house after the session, because one       |
+| Flows)**                 | session processes only 1,000–1,200: the Director calls the crew    |
+|                          | back for a further overnight session, repeating from step 1.       |
++--------------------------+--------------------------------------------------------------------+
+
+
+**UC-04: Sell Meat**
+
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Number**      | UC-04                                                              |
++--------------------------+--------------------------------------------------------------------+
+| **Application**          | Nurota Halol Parranda current operations: slaughter and sales      |
+|                          | (Figure 2.1)                                                       |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Name**        | Sell Meat                                                          |
++--------------------------+--------------------------------------------------------------------+
+| **Use Case Description** | The Director sells slaughtered meat through three independent      |
+|                          | buyers. The Bazaar Agent, a middleman at Navoi bazaar who resells  |
+|                          | to seven to nine other sellers, takes the largest volume at around |
+|                          | 26,000 UZS/kg; an individual seller in Nurata pays around 27,000   |
+|                          | UZS/kg; and the shop at the Director's house sells to local        |
+|                          | customers at roughly 28,000 UZS/kg. The farm sets none of these    |
+|                          | prices; all shift with the market. Every sale ends as revenue in   |
+|                          | pDaftar, but only the Bazaar Agent channel sends the farm a weight |
+|                          | record: a daily Telegram photo of his kg totals.                   |
++--------------------------+--------------------------------------------------------------------+
+| **Primary Actor**        | Director (secondary: Buyer, i.e. the Bazaar Agent, Nurata Seller   |
+|                          | or Shop Customer)                                                  |
++--------------------------+--------------------------------------------------------------------+
+| **Precondition**         | Meat from a slaughter session (UC-03) is ready for sale.           |
++--------------------------+--------------------------------------------------------------------+
+| **Postconditions**       | The meat has been sold, the buyer has paid, and the revenue is     |
+|                          | recorded in pDaftar.                                               |
++--------------------------+--------------------------------------------------------------------+
+| **Trigger**              | A slaughter session finishes and its meat is ready.                |
++--------------------------+--------------------------------------------------------------------+
+| **Basic Flow**           | 1. The Director allocates the session's meat to a buyer.           |
+|                          | 2. The meat is weighed in kilograms.                               |
+|                          | 3. The price per kg is set at the current market rate.             |
+|                          | 4. The buyer pays the Director.                                    |
+|                          | 5. The Director records the revenue in pDaftar (includes Record in |
+|                          |    pDaftar).                                                       |
++--------------------------+--------------------------------------------------------------------+
+| **Extensions (Alternate  | 2a. The buyer is the Bazaar Agent, the largest channel (Agree      |
+| Flows)**                 | Price per kg and Send Weight Photo by Telegram «extend» this use   |
+|                          | case): (1) the Director and the agent agree the price per kg       |
+|                          | verbally at that day's bazaar rate; (2) the meat goes to Navoi     |
+|                          | bazaar with a temporarily hired driver, arranged separately by the |
+|                          | Director in Arrange Delivery; (3) the agent weighs the meat and    |
+|                          | totals the kilograms; (4) the agent photographs the kg totals and  |
+|                          | sends them to the Director on Telegram; (5) the agent settles by   |
+|                          | cash or bank transfer; the flow resumes at step 5.                 |
+|                          |                                                                    |
+|                          | 3a. The buyer is the Nurata Seller: the price is around 27,000     |
+|                          | UZS/kg, and the flow resumes at step 4.                            |
+|                          |                                                                    |
+|                          | 3b. The buyer is a Shop Customer: the meat is sold from the shop   |
+|                          | at the Director's house at roughly 28,000 UZS/kg, and the flow     |
+|                          | resumes at step 4.                                                 |
++--------------------------+--------------------------------------------------------------------+

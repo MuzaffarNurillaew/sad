@@ -1,0 +1,82 @@
+' Use case diagram for section 2 (2-use-case-diagram.md).
+' Rendered with Graphviz dot, not the pipeline's smetana engine, which cannot lay out
+' 22 use cases legibly. Re-render after editing:
+'   java -jar tools/plantuml.jar -tpng diagrams/use-case-diagram.puml   (needs Graphviz 'dot')
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontSize 14
+actor "Worker" as WK
+actor "Director" as DIR
+actor "Slaughter Crew" as CREW
+actor "Chick Supplier" as CSUP
+actor "Feed Supplier" as FSUP
+actor "Buyer" as BUY
+actor "Bazaar Agent" as BA
+actor "Nurata Seller" as NS
+actor "Shop Customer" as SHC
+rectangle "Nurota Halol Parranda: current operations" {
+  usecase "Check Houses" as CH
+  usecase "Report Dead Chicks" as RD
+  usecase "Log Feed Use" as LF
+  usecase "Write in Notebook" as NB
+  usecase "Monitor Houses by Camera" as MC
+  usecase "Cull Sick Chicks" as CS
+  usecase "Thin Out Flock" as TF
+  usecase "Slaughter Client Order" as SC
+  usecase "Decide Main Slaughter Date" as DS
+  usecase "Weigh Sample Birds" as WS
+  usecase "Postpone Slaughter" as PS
+  usecase "Run Main Slaughter" as MS
+  usecase "Order Day-Old Chicks" as OC
+  usecase "Order Feed and Vitamins" as OF
+  usecase "Pay Supplier by Bank Transfer" as PY
+  usecase "Pay Slaughter Crew per Head" as PC
+  usecase "Record in pDaftar" as PD
+  usecase "Calculate Batch Profit" as CP
+  usecase "Arrange Delivery" as AD
+  usecase "Sell Meat" as SM
+  usecase "Agree Price per kg" as AP
+  usecase "Send Weight Photo by Telegram" as WP
+}
+WK -- CH
+WK -- RD
+WK -- SC
+DIR -- RD
+DIR -- LF
+DIR -- MC
+DIR -- OC
+DIR -- OF
+DIR -- SC
+DIR -- CS
+DIR -- TF
+DIR -- DS
+DIR -- MS
+DIR -- PC
+DIR -- AD
+DIR -- SM
+DIR -- CP
+RD ..> NB : <<include>>
+LF ..> NB : <<include>>
+OC ..> PY : <<include>>
+OF ..> PY : <<include>>
+PY .> PD : <<include>>
+PC ..> PD : <<include>>
+AD ..> PD : <<include>>
+SM ..> PD : <<include>>
+CP ..> PD : <<include>>
+DS ..> WS : <<include>>
+DS <.. PS : <<extend>>\n{sample average below sale weight}
+SM <.. AP : <<extend>>\n{buyer is the Bazaar Agent}
+SM <.. WP : <<extend>>\n{buyer is the Bazaar Agent}
+CSUP -- OC
+FSUP -- OF
+CREW -- MS
+CREW -- PC
+BUY -- SM
+BA -- WP
+BUY <|-- BA
+BUY <|-- NS
+BUY <|-- SHC
+@enduml
