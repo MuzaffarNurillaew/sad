@@ -180,7 +180,7 @@ Flag for section 1 (Muzaffar): every 2026-10-24/26 answer used here needs to be 
 Flag for Nodir: sections 4-5 say the agent pays "at" the day's bazaar rate; confirmed answer is "a little below".
 -->
 
-The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale whose steps our sources document (Figure 2.3). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
+Each of the four use cases turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Two of them rest only on a verbal agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
 """
 
 TAIL = ""
