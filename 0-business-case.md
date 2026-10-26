@@ -2,7 +2,7 @@
 
 Nurota Halol Parranda MCHJ is a family-owned broiler (meat-chicken) farm in Nurata, Navoi region, Uzbekistan, run across two houses by its owner-director, who bears full financial risk.
 
-Procurement: day-old chicks come from suppliers in Samarkand or Tashkent, delivered by Damas van, in numbers matching each house's 5,000–10,000-bird capacity, under a standing contract paid by bank transfer; a new order for a given house falls roughly every 60 days, once cleaned after the previous batch. Feed and vitamins follow the same contract, timed by season and current prices.
+Procurement: day-old chicks come from suppliers in Tashkent, delivered by Damas van, in numbers matching each house's 5,000–10,000-bird capacity, under a standing contract paid by bank transfer; a new order for a given house falls roughly every 60 days, once cleaned after the previous batch. Feed and vitamins follow the same contract, timed by season and current prices.
 
 Once chicks arrive, day-to-day production work begins. 2–4 permanent workers check each house every 15–30 minutes rather than on a fixed schedule. When a chick dies, the worker who finds it reports the death verbally to the director, who logs it by hand in the same notebook as feed use; like the director's other production statistics, the resulting count is only an approximation. Cameras separately feed an Android monitoring app.
 
