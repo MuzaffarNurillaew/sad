@@ -10,12 +10,10 @@ suppliers deliver; readiness judged on age + random-sample average weight + expe
 Bazaar Agent is an independent middleman paying a little below the bazaar rate; amount owed = kg x price; a second person from the farm
 also records the bazaar weighings; agent pays cash or transfer at the end of the day.
 To confirm with Muzaffar (question -> table -> marks at stake):
-- If the agent's photo kg and the farm's record disagree, what happens? -> UC-04 exception 5a -> +1 (quality).
+Answered 2026-10-26: weight mismatch 'no chance' (none added); short/dead chicks are the supplier's responsibility (UC-01 4a);
+bazaar person = anyone the Director trusts, who also takes the cash (UC-04 steps 3, 6); price agreed before dispatch (UC-04 order kept).
 - Has the crew ever disputed the head count, or not turned up? -> UC-03 exception (its only extension, 7a, is an alternate ending) -> +0.5.
-- Have chicks ever arrived short or dead? What did the Director do? -> UC-01 exception -> +0.5.
-- Who is the "second person from our side" at the bazaar? (sections 4-5 say a Worker) -> UC-04 step 3.
 - Who weighs the sample birds? (sections 4-5 say the Director) -> UC-02 step 2.
-- Is the batch-end supplier payment still by bank transfer? (section 0 says bank transfer) -> UC-01.
 Flag for section 1 (Muzaffar): every 2026-10-24/26 answer used here needs to be recorded there as evidence.
 Flag for Nodir: sections 4-5 say the agent pays "at" the day's bazaar rate; confirmed answer is "a little below".
 -->
@@ -58,8 +56,13 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 |                          |    Tashkent.                                                       |
 |                          | 4. The supplier delivers the chicks to the farm by Damas van.      |
 +--------------------------+--------------------------------------------------------------------+
-| **Extensions (Alternate  | 1a. The house is not yet cleaned: the order waits until cleaning   |
-| Flows)**                 | is finished, then the flow resumes at step 1.                      |
+| **Extensions (Alternate  | 1a. The house is not yet cleaned: the order waits until the hired  |
+| Flows)**                 | cleaners have finished, then the flow resumes at step 1.           |
+|                          |                                                                    |
+|                          | 4a. Some chicks arrive dead, or fewer arrive than ordered: under   |
+|                          | the contract the Chick Supplier bears the loss, so the Director    |
+|                          | raises it with the supplier rather than absorbing it. The use case |
+|                          | then ends as normal.                                               |
 +--------------------------+--------------------------------------------------------------------+
 
 
@@ -162,10 +165,11 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Description** | The Bazaar Agent is the farm's largest buyer. As a middleman       |
 |                          | reselling to seven to nine other sellers, the agent pays only      |
-|                          | about 26,000 UZS/kg, a little below the bazaar rate. Someone from  |
-|                          | the farm writes down the same weighings as the agent, and the      |
-|                          | Director compares the two. Only the payment reaches pDaftar; both  |
-|                          | weight records stay outside it.                                    |
+|                          | about 26,000 UZS/kg, a little below the bazaar rate. Whoever the   |
+|                          | Director trusts that day goes to the bazaar, writes down the same  |
+|                          | weighings as the agent and collects the cash. The farm says the    |
+|                          | two weight records never disagree, yet only the payment reaches    |
+|                          | pDaftar; both weight records stay outside it.                      |
 +--------------------------+--------------------------------------------------------------------+
 | **Primary Actor**        | Director                                                           |
 +--------------------------+--------------------------------------------------------------------+
@@ -183,14 +187,14 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 |                          |    Price per kg).                                                  |
 |                          | 2. The Director sends the meat to Navoi bazaar with a temporarily  |
 |                          |    hired driver.                                                   |
-|                          | 3. The agent weighs the meat, while a second person from the farm  |
+|                          | 3. The agent weighs the meat, while a person the Director trusts   |
 |                          |    records the same weighings.                                     |
 |                          | 4. The agent photographs his kg totals and sends them to the       |
 |                          |    Director on Telegram (includes Send Weight Photo by Telegram).  |
 |                          | 5. The Director checks the photographed totals against the farm's  |
 |                          |    own record.                                                     |
-|                          | 6. The agent pays the Director the total kg × the agreed price per |
-|                          |    kg in cash at the end of the day.                               |
+|                          | 6. The agent pays the total kg × the agreed price per kg in cash   |
+|                          |    to the trusted person at the end of the day.                    |
 |                          | 7. The Director records the revenue in pDaftar (Record in pDaftar, |
 |                          |    which Sell Meat includes).                                      |
 +--------------------------+--------------------------------------------------------------------+

@@ -1,6 +1,6 @@
 ' Use case diagram for section 2 (2-use-case-diagram.md).
 ' Rendered with Graphviz dot, not the pipeline's smetana engine, which cannot lay out
-' 24 use cases legibly. Re-render after editing:
+' 25 use cases legibly. Re-render after editing:
 '   java -jar tools/plantuml.jar -tpng diagrams/use-case-diagram.puml   (needs Graphviz 'dot')
 ' Layout notes (compare renders before changing any of these):
 ' - The dead-chick extend is written `RD ..> CH`. `CH <.. RD` moves Report Dead Chicks to the far column,
@@ -18,6 +18,7 @@ actor "Director" as DIR
 actor "Slaughter Crew" as CREW
 actor "Chick Supplier" as CSUP
 actor "Feed Supplier" as FSUP
+actor "Cleaning Crew" as CLC
 actor "Buyer" as BUY
 actor "Bazaar Agent" as BA
 actor "Nurata Seller" as NS
@@ -34,6 +35,7 @@ rectangle "Nurota Halol Parranda: current operations" {
   usecase "Decide Main Slaughter Date" as DS
   usecase "Weigh Sample Birds" as WS
   usecase "Run Main Slaughter" as MS
+  usecase "Clean and Prepare House" as CLN
   usecase "Order Day-Old Chicks" as OC
   usecase "Deliver Day-Old Chicks" as DC
   usecase "Order Feed and Vitamins" as OF
@@ -56,6 +58,7 @@ DIR -- MC
 DIR -- CS
 DIR -- TF
 DIR -- CP
+DIR -- CLN
 DIR -- OC
 DIR -- OF
 DIR -- PY
@@ -85,6 +88,7 @@ FSUP -- PY
 CREW -- MS
 CREW -- DS
 CREW -- PC
+CLC -- CLN
 BUY -- SM
 BUY -- SC
 BA -- SMBA
