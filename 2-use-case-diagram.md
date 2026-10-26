@@ -58,9 +58,3 @@ The three figures are one diagram, split by stage of a batch under one boundary.
 ![Use case diagram, part 3: slaughter and sales](diagrams/use-case-slaughter-sales.png)
 
 *Figure 2.3: Use case diagram, part 3 of 3: slaughter and sales (as-is)*
-
-- **The two records never meet.** Rearing writes only to the notebook, and money only to pDaftar. Calculate Profit reads only pDaftar, which pools figures rather than splitting them by batch (section 1), so no batch's profit can be set against its deaths and feed use.
-- **One person holds every decision.** The Director is linked to 16 of the 26 use cases, as owner, production manager and bookkeeper at once. The slaughter date, the butcher's head count and the agent's price per kg all rest on his judgement or a verbal agreement.
-- **Pay and sales use different units.** The butcher is paid per head and every buyer pays per kilogram, with no record linking the two, so the slaughter cost per kilogram sold is unknown.
-- **Costs are settled late.** Pay Supplier at Batch End is separate from ordering because chick and feed bills fall due when the batch ends, by which point the meat has normally been sold.
-- **The only check on an outsider has no owner.** Record Bazaar Weighings is the one documented point where the farm keeps its own copy of an outsider's figure, and its actor, the Trusted Representative, can be anyone the Director trusts.

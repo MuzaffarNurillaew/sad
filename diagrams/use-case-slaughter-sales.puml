@@ -1,6 +1,7 @@
 ' Use case diagram for section 2 (2-use-case-diagram.md), part 3 of 3: slaughter and sales.
 ' The farm's use case diagram is split into three figures by stage of the batch
 ' (use-case-rearing, use-case-procurement, use-case-slaughter-sales); all use the identical boundary label.
+' Ovals with a section 3 table carry its number (UC-01..UC-04) for traceability.
 ' Rendered with Graphviz dot. Re-render after editing:
 '   java -jar tools/plantuml.jar -tpng diagrams/use-case-slaughter-sales.puml   (needs Graphviz 'dot')
 ' Layout: actors on the left except the Trusted Representative (`RW -- TR`, `SMBA -- TR`, on the right).
@@ -25,14 +26,14 @@ actor "Nurata Seller" as NS
 actor "Shop Customer" as SHC
 actor "Trusted Representative" as TR
 rectangle "Nurota Halol Parranda: current operations" {
-  usecase "Decide Main Slaughter Date" as DS
+  usecase "UC-02\nDecide Main Slaughter Date" as DS
   usecase "Weigh Sample Birds" as WS
-  usecase "Run Main Slaughter" as MS
+  usecase "UC-03\nRun Main Slaughter" as MS
   usecase "Pay Slaughter Crew" as PC
   usecase "Slaughter Client Order" as SC
   usecase "Arrange Delivery" as AD
   usecase "Sell Meat" as SM
-  usecase "Sell Meat to Bazaar Agent" as SMBA
+  usecase "UC-04\nSell Meat to Bazaar Agent" as SMBA
   usecase "Agree Price per kg" as AP
   usecase "Send Weight Photo by Telegram" as WP
   usecase "Record Bazaar Weighings" as RW
