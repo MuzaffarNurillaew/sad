@@ -13,7 +13,7 @@ L, R = 24, 66  # column content widths
 UCS = [
     {
         "Use Case Number": "UC-01",
-        "Application": "Nurota Halol Parranda current operations: procurement (Figure 2.1)",
+        "Application": "Nurota Halol Parranda: current operations, procurement and accounts (Figure 2.2)",
         "Use Case Name": "Order Day-Old Chicks",
         "Use Case Description": (
             "The Director orders a new batch of chicks for an empty house from the contracted supplier in Tashkent. Because the contract has the chicks paid for only when the batch ends, the farm is already selling a batch's meat before it has paid for the birds."
@@ -30,16 +30,16 @@ UCS = [
             "The Director confirms that the house has been cleaned and prepared.",
             "The Director sets the order size from the house's 5,000–10,000-bird capacity.",
             "The Director places the order with the contracted supplier in Tashkent.",
-            "The supplier delivers the chicks to the farm by Damas van.",
+            "The Chick Supplier delivers the chicks to the farm by Damas van (includes Deliver Day-Old Chicks).",
         ],
         "Extensions": [
-            "1a. The house is not yet cleaned: the order waits until the hired cleaners have finished, then the flow resumes at step 1.",
+            "1a. The house is not yet cleaned: the order waits until the Cleaning Crew has finished, then the flow resumes at step 1.",
             "4a. Some chicks arrive dead, or fewer arrive than ordered: under the contract the Chick Supplier bears the loss, so the Director raises it with the supplier rather than absorbing it. The use case then ends as normal.",
         ],
     },
     {
         "Use Case Number": "UC-02",
-        "Application": "Nurota Halol Parranda current operations: slaughter and sales (Figure 2.1)",
+        "Application": "Nurota Halol Parranda: current operations, slaughter and sales (Figure 2.3)",
         "Use Case Name": "Decide Main Slaughter Date",
         "Use Case Description": (
             "The Director decides when to call in the slaughter crew. He weighs up the birds' age, the average weight of about ten birds and his own experience. We found no written target weight or age, and the call depends on him alone: nobody else could make it or check it."
@@ -66,7 +66,7 @@ UCS = [
     },
     {
         "Use Case Number": "UC-03",
-        "Application": "Nurota Halol Parranda current operations: slaughter and sales (Figure 2.1)",
+        "Application": "Nurota Halol Parranda: current operations, slaughter and sales (Figure 2.3)",
         "Use Case Name": "Run Main Slaughter",
         "Use Case Description": (
             "A hired crew of about six slaughters and cleans 1,000–1,200 birds in one overnight session, and the Director calls them back as many times as it takes to empty the house. The butcher is paid per head. The count behind that pay is agreed out loud at the end of each session and is not recorded."
@@ -94,7 +94,7 @@ UCS = [
     },
     {
         "Use Case Number": "UC-04",
-        "Application": "Nurota Halol Parranda current operations: slaughter and sales (Figure 2.1)",
+        "Application": "Nurota Halol Parranda: current operations, slaughter and sales (Figure 2.3)",
         "Use Case Name": "Sell Meat to Bazaar Agent",
         "Use Case Description": (
             "The Bazaar Agent is the farm's largest buyer. As a middleman reselling to seven to nine other sellers, the agent pays only about 26,000 UZS/kg, a little below the bazaar rate. Whoever the Director trusts that day goes to the bazaar, writes down the same weighings as the agent and collects the cash. The farm says the two weight records never disagree, yet only the payment reaches pDaftar; both weight records stay outside it."
@@ -181,22 +181,10 @@ Flag for section 1 (Muzaffar): every 2026-10-24/26 answer used here needs to be 
 Flag for Nodir: sections 4-5 say the agent pays "at" the day's bazaar rate; confirmed answer is "a little below".
 -->
 
-The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale with steps of its own (Figure 2.1). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
+The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale with steps of its own (Figure 2.3). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
 """
 
-TAIL = """
-Section 7 has to close each gap in the table below.
-
-| Finding | Evidence | Where it shows | Section 7 must cover |
-|---|---|---|---|
-| Deaths and feed use never reach the profit figure | Section 0: notebook and pDaftar kept separately | Write in Notebook, Record in pDaftar (Figure 2.1) | One batch record linking deaths, feed, costs and sales |
-| The slaughter date rests on a sample and judgement, with no recorded target | Section 0; interview 26-10 | UC-02 steps 2-3 | Recording sample weights and age per batch |
-| The butcher's pay rests on a spoken head count | Section 0 | UC-03 step 6 | Recording the head count per session |
-| The agent's price per kg is agreed each time and not written down | Interview 24-10 | UC-04 step 1 | Recording the agreed price and keeping a price history |
-| The agent's kilograms can be checked only against a second record kept by the farm | Interview 26-10 | UC-04 steps 3-5 | Recording both weights and flagging any difference |
-| Chick and feed costs are settled only when the batch ends | Interview 26-10 | UC-01; Pay Supplier at Batch End | Running batch cost from the day the chicks arrive |
-| The butcher is paid per head but every buyer pays per kg | Section 0 | UC-03 step 6, UC-04 step 6 | Recording heads and kilograms per session |
-"""
+TAIL = ""
 
 body = [HEAD]
 for uc in UCS:

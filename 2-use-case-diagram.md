@@ -4,8 +4,10 @@
 
 <!--
 Scope: AS-IS (the farm's current manual process), per CLAUDE.md. The proposed system belongs in section 7 only.
-One diagram, embedded as diagrams/use-case-diagram.png. Its source is diagrams/use-case-diagram.puml, rendered with Graphviz dot
-(the pipeline's smetana engine cannot lay out 25 use cases legibly). Re-render: java -jar tools/plantuml.jar -tpng diagrams/use-case-diagram.puml
+One diagram drawn as three figures by stage of the batch (2026-10-26, Abdurahmon's choice: the single figure was too crowded):
+diagrams/use-case-rearing.puml, use-case-procurement.puml and use-case-slaughter-sales.puml, each rendered to a PNG with Graphviz dot.
+Re-render: java -jar tools/plantuml.jar -tpng diagrams/use-case-rearing.puml diagrams/use-case-procurement.puml diagrams/use-case-slaughter-sales.puml
+25 unique use cases; Record in pDaftar appears in Figures 2.2 and 2.3. Recount "16 of the 25" across all three files after any edit.
 
 Stated in 0-business-case.md: suppliers on contract; verbal death reports logged in the notebook with feed use; butcher paid per
 head on a verbally agreed count; Bazaar Agent is a middleman who sends daily kg photos on Telegram and settles by cash or transfer;
@@ -38,17 +40,27 @@ Calculate Batch Profit no longer includes Record in pDaftar: it only reads it.
 2026-10-26 rename: "Pay Slaughter Crew per Head" -> "Pay Slaughter Crew" (section 0 says only the butcher is paid per head).
 FLAG for Nodir: 4-data-flow-diagram.md line 33 still uses the old name.
 UC-02 now lists the Slaughter Crew as secondary actor, so the diagram links Slaughter Crew to Decide Main Slaughter Date.
-Reference names for sections 3-7: Director, Worker, Slaughter Crew, Chick Supplier, Feed Supplier, Buyer / Bazaar Agent / Nurata Seller / Shop Customer, and the use case names below.
+Reference names for sections 3-7: Director, Worker, Slaughter Crew, Cleaning Crew, Chick Supplier, Feed Supplier, Buyer / Bazaar Agent / Nurata Seller / Shop Customer, and the use case names below.
 -->
 
-The diagram shows how Nurota Halol Parranda runs today, from ordering chicks to selling the meat, with no computer system involved. We drew the boundary around the farm's manual procedures and records rather than around the farm itself. That is why the Director and the Workers are actors here but sit inside the boundary in the section 4 DFD. The two suppliers, the hired Slaughter Crew, the temporarily hired Cleaning Crew and the buyers are outside. The Bazaar Agent, the Nurata Seller and the Shop Customer are kinds of Buyer. Clients place small orders by contacting the Director directly, so Slaughter Client Order is linked to Buyer in general rather than to one buyer type. The delivery driver is also a temporary hire, but shows up only as a cost in Arrange Delivery, so the driver is not an actor.
+The diagram shows how Nurota Halol Parranda runs today, from ordering chicks to selling the meat, with no computer system involved. We drew the boundary around the farm's manual procedures and records rather than around the farm itself. That is why the Director and the Worker are actors here but sit inside the boundary in the section 4 DFD. The two suppliers, the hired Slaughter Crew, the temporarily hired Cleaning Crew and the buyers are outside. The Bazaar Agent, the Nurata Seller and the Shop Customer are kinds of Buyer. Clients place small orders by contacting the Director directly, so Slaughter Client Order is linked to Buyer in general rather than to one buyer type. The delivery driver is also a temporary hire, but shows up only as a cost in Arrange Delivery, so the driver is not an actor.
 
-![Use case diagram of the farm's current operations](diagrams/use-case-diagram.png)
+The diagram is drawn in three parts, one for each stage of a batch. All three share the same system boundary, so they read as one diagram. Record in pDaftar appears in both Figure 2.2 and Figure 2.3, because both stages write to it.
 
-*Figure 2.1: Use case diagram of the farm's current (as-is) operations*
+![Use case diagram, part 1: rearing](diagrams/use-case-rearing.png)
+
+*Figure 2.1: Use case diagram, part 1 of 3: rearing (as-is)*
+
+![Use case diagram, part 2: procurement and accounts](diagrams/use-case-procurement.png)
+
+*Figure 2.2: Use case diagram, part 2 of 3: procurement and accounts (as-is)*
+
+![Use case diagram, part 3: slaughter and sales](diagrams/use-case-slaughter-sales.png)
+
+*Figure 2.3: Use case diagram, part 3 of 3: slaughter and sales (as-is)*
 
 The farm keeps two kinds of record and never joins them. Report Dead Chicks and Log Feed Use both include Write in Notebook. Paying the suppliers, paying the crew, arranging delivery and selling meat all include Record in pDaftar. Calculate Batch Profit reads only pDaftar, so a batch's profit is never set against the deaths and feed use behind it. A house check leaves a record only when a dead chick is found, and that is the one point where Report Dead Chicks extends Check Houses.
 
-The Director is linked to 16 of the 25 use cases. In practice the farm's owner, production manager and bookkeeper are the same person. Three of his money decisions rest on judgement or a spoken agreement: the butcher's head count, the agent's price per kg, and the slaughter date, which he sets from a sample of about ten birds and his own experience. The butcher is paid per head, but every buyer pays per kilogram, and no record links the two. As a result, the farm cannot tell what slaughtering costs per kilogram sold. Under the supply contract, chicks and feed are paid for when the batch ends, and Pay Supplier at Batch End is drawn apart from ordering for that reason: a batch's chick and feed bills are settled only after its meat has been sold.
+Across the three figures, the Director is linked to 16 of the 25 use cases. In practice the farm's owner, production manager and bookkeeper are the same person. Three of his money decisions rest on judgement or a spoken agreement: the butcher's head count, the agent's price per kg, and the slaughter date, which he sets from a sample of about ten birds and his own experience. The butcher is paid per head, but every buyer pays per kilogram, and no record links the two. As a result, the farm cannot tell what slaughtering costs per kilogram sold. Under the supply contract, chicks and feed are paid for when the batch ends, and Pay Supplier at Batch End is drawn apart from ordering for that reason: a batch's chick and feed bills are settled only after its meat has been sold.
 
 Sell Meat to Bazaar Agent is a special case of Sell Meat because only this sale has steps of its own: a price agreed each time in conversation, and a Telegram photo of the weights. It is also the one place where the farm checks a figure from an outsider. Whoever the Director trusts that day goes to the bazaar and writes down the same weighings as the agent, so this check has no fixed owner.

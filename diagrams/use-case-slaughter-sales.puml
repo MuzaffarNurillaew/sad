@@ -1,0 +1,57 @@
+' Use case diagram for section 2 (2-use-case-diagram.md), part 3 of 3: slaughter and sales.
+' The farm's use case diagram is split into three figures by stage of the batch
+' (use-case-rearing, use-case-procurement, use-case-slaughter-sales); all use the identical boundary label.
+' Rendered with Graphviz dot. Re-render after editing:
+'   java -jar tools/plantuml.jar -tpng diagrams/use-case-slaughter-sales.puml   (needs Graphviz 'dot')
+' Layout: all actors on the left. Buyers on the right put the Buyer -> Sell Meat line beside the
+'   generalisation triangle, which reads ambiguously; the cost is the Bazaar Agent line crossing the title.
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontSize 14
+
+actor "Worker" as WK
+actor "Director" as DIR
+actor "Slaughter Crew" as CREW
+actor "Buyer" as BUY
+actor "Bazaar Agent" as BA
+actor "Nurata Seller" as NS
+actor "Shop Customer" as SHC
+rectangle "Nurota Halol Parranda: current operations" {
+  usecase "Decide Main Slaughter Date" as DS
+  usecase "Weigh Sample Birds" as WS
+  usecase "Run Main Slaughter" as MS
+  usecase "Pay Slaughter Crew" as PC
+  usecase "Slaughter Client Order" as SC
+  usecase "Arrange Delivery" as AD
+  usecase "Sell Meat" as SM
+  usecase "Sell Meat to Bazaar Agent" as SMBA
+  usecase "Agree Price per kg" as AP
+  usecase "Send Weight Photo by Telegram" as WP
+  usecase "Record in pDaftar" as PD
+}
+WK -- SC
+DIR -- DS
+DIR -- MS
+DIR -- PC
+DIR -- SC
+DIR -- AD
+DIR -- SM
+DS ..> WS : <<include>>
+PC ..> PD : <<include>>
+AD ..> PD : <<include>>
+SM ..> PD : <<include>>
+SM <|-- SMBA
+SMBA ..> AP : <<include>>
+SMBA ..> WP : <<include>>
+CREW -- DS
+CREW -- MS
+CREW -- PC
+BUY -- SC
+BUY -- SM
+BA -- SMBA
+BUY <|-- BA
+BUY <|-- NS
+BUY <|-- SHC
+@enduml

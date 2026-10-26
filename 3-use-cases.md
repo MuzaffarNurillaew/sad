@@ -18,7 +18,7 @@ Flag for section 1 (Muzaffar): every 2026-10-24/26 answer used here needs to be 
 Flag for Nodir: sections 4-5 say the agent pays "at" the day's bazaar rate; confirmed answer is "a little below".
 -->
 
-The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale with steps of its own (Figure 2.1). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
+The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale with steps of its own (Figure 2.3). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
 
 
 **UC-01: Order Day-Old Chicks**
@@ -26,7 +26,8 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Number**      | UC-01                                                              |
 +--------------------------+--------------------------------------------------------------------+
-| **Application**          | Nurota Halol Parranda current operations: procurement (Figure 2.1) |
+| **Application**          | Nurota Halol Parranda: current operations, procurement and         |
+|                          | accounts (Figure 2.2)                                              |
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Name**        | Order Day-Old Chicks                                               |
 +--------------------------+--------------------------------------------------------------------+
@@ -54,10 +55,11 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 |                          |    5,000–10,000-bird capacity.                                     |
 |                          | 3. The Director places the order with the contracted supplier in   |
 |                          |    Tashkent.                                                       |
-|                          | 4. The supplier delivers the chicks to the farm by Damas van.      |
+|                          | 4. The Chick Supplier delivers the chicks to the farm by Damas van |
+|                          |    (includes Deliver Day-Old Chicks).                              |
 +--------------------------+--------------------------------------------------------------------+
-| **Extensions (Alternate  | 1a. The house is not yet cleaned: the order waits until the hired  |
-| Flows)**                 | cleaners have finished, then the flow resumes at step 1.           |
+| **Extensions (Alternate  | 1a. The house is not yet cleaned: the order waits until the        |
+| Flows)**                 | Cleaning Crew has finished, then the flow resumes at step 1.       |
 |                          |                                                                    |
 |                          | 4a. Some chicks arrive dead, or fewer arrive than ordered: under   |
 |                          | the contract the Chick Supplier bears the loss, so the Director    |
@@ -71,8 +73,8 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Number**      | UC-02                                                              |
 +--------------------------+--------------------------------------------------------------------+
-| **Application**          | Nurota Halol Parranda current operations: slaughter and sales      |
-|                          | (Figure 2.1)                                                       |
+| **Application**          | Nurota Halol Parranda: current operations, slaughter and sales     |
+|                          | (Figure 2.3)                                                       |
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Name**        | Decide Main Slaughter Date                                         |
 +--------------------------+--------------------------------------------------------------------+
@@ -112,8 +114,8 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Number**      | UC-03                                                              |
 +--------------------------+--------------------------------------------------------------------+
-| **Application**          | Nurota Halol Parranda current operations: slaughter and sales      |
-|                          | (Figure 2.1)                                                       |
+| **Application**          | Nurota Halol Parranda: current operations, slaughter and sales     |
+|                          | (Figure 2.3)                                                       |
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Name**        | Run Main Slaughter                                                 |
 +--------------------------+--------------------------------------------------------------------+
@@ -158,8 +160,8 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Number**      | UC-04                                                              |
 +--------------------------+--------------------------------------------------------------------+
-| **Application**          | Nurota Halol Parranda current operations: slaughter and sales      |
-|                          | (Figure 2.1)                                                       |
+| **Application**          | Nurota Halol Parranda: current operations, slaughter and sales     |
+|                          | (Figure 2.3)                                                       |
 +--------------------------+--------------------------------------------------------------------+
 | **Use Case Name**        | Sell Meat to Bazaar Agent                                          |
 +--------------------------+--------------------------------------------------------------------+
@@ -202,15 +204,3 @@ The four use cases follow one batch from buying the chicks to selling the meat. 
 | Flows)**                 | resumes at step 7.                                                 |
 +--------------------------+--------------------------------------------------------------------+
 
-
-Section 7 has to close each gap in the table below.
-
-| Finding | Evidence | Where it shows | Section 7 must cover |
-|---|---|---|---|
-| Deaths and feed use never reach the profit figure | Section 0: notebook and pDaftar kept separately | Write in Notebook, Record in pDaftar (Figure 2.1) | One batch record linking deaths, feed, costs and sales |
-| The slaughter date rests on a sample and judgement, with no recorded target | Section 0; interview 26-10 | UC-02 steps 2-3 | Recording sample weights and age per batch |
-| The butcher's pay rests on a spoken head count | Section 0 | UC-03 step 6 | Recording the head count per session |
-| The agent's price per kg is agreed each time and not written down | Interview 24-10 | UC-04 step 1 | Recording the agreed price and keeping a price history |
-| The agent's kilograms can be checked only against a second record kept by the farm | Interview 26-10 | UC-04 steps 3-5 | Recording both weights and flagging any difference |
-| Chick and feed costs are settled only when the batch ends | Interview 26-10 | UC-01; Pay Supplier at Batch End | Running batch cost from the day the chicks arrive |
-| The butcher is paid per head but every buyer pays per kg | Section 0 | UC-03 step 6, UC-04 step 6 | Recording heads and kilograms per session |

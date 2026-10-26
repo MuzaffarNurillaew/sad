@@ -3,9 +3,11 @@
 ' 25 use cases legibly. Re-render after editing:
 '   java -jar tools/plantuml.jar -tpng diagrams/use-case-diagram.puml   (needs Graphviz 'dot')
 ' Layout notes (compare renders before changing any of these):
-' - The dead-chick extend is written `RD ..> CH`. `CH <.. RD` moves Report Dead Chicks to the far column,
-'   and a same-column `RD .> CH` loops the extend arrow outside the boundary.
-' - `NB -[hidden]- CH` and `CH -- WK` written last keep the Worker -> Check Houses line inside the boundary.
+' - Use cases are grouped by stage of the batch (packages inside the boundary); the shared record
+'   use cases sit in their own Records package, so every include arrow ends there.
+' - Calculate Batch Profit sits in "Procurement and accounts": inside Records it pulled the Director's line over the top.
+' - `CH -- WK` is written last; written first, the Worker -> Check Houses line runs outside the boundary.
+' - `CH <.. RD` (instead of `RD ..> CH`) doubles the diagram's size. Putting external actors on the right scatters it.
 ' - An include from Sell Meat to Bazaar Agent to Arrange Delivery was tried and scattered the layout, so UC-04
 '   describes the driver in its own step rather than naming Arrange Delivery.
 @startuml
@@ -15,50 +17,57 @@ skinparam shadowing false
 skinparam defaultFontSize 14
 actor "Worker" as WK
 actor "Director" as DIR
-actor "Slaughter Crew" as CREW
+actor "Cleaning Crew" as CLC
 actor "Chick Supplier" as CSUP
 actor "Feed Supplier" as FSUP
-actor "Cleaning Crew" as CLC
+actor "Slaughter Crew" as CREW
 actor "Buyer" as BUY
 actor "Bazaar Agent" as BA
 actor "Nurata Seller" as NS
 actor "Shop Customer" as SHC
 rectangle "Nurota Halol Parranda: current operations" {
-  usecase "Check Houses\n--\nextension points\ndead chick found" as CH
-  usecase "Report Dead Chicks" as RD
-  usecase "Log Feed Use" as LF
-  usecase "Write in Notebook" as NB
-  usecase "Monitor Houses by Camera" as MC
-  usecase "Cull Sick Chicks" as CS
-  usecase "Thin Out Flock" as TF
-  usecase "Slaughter Client Order" as SC
-  usecase "Decide Main Slaughter Date" as DS
-  usecase "Weigh Sample Birds" as WS
-  usecase "Run Main Slaughter" as MS
-  usecase "Clean and Prepare House" as CLN
-  usecase "Order Day-Old Chicks" as OC
-  usecase "Deliver Day-Old Chicks" as DC
-  usecase "Order Feed and Vitamins" as OF
-  usecase "Deliver Feed and Vitamins" as DF
-  usecase "Pay Supplier at Batch End" as PY
-  usecase "Pay Slaughter Crew" as PC
-  usecase "Record in pDaftar" as PD
-  usecase "Calculate Batch Profit" as CP
-  usecase "Arrange Delivery" as AD
-  usecase "Sell Meat" as SM
-  usecase "Sell Meat to Bazaar Agent" as SMBA
-  usecase "Agree Price per kg" as AP
-  usecase "Send Weight Photo by Telegram" as WP
+  package "Rearing" {
+    usecase "Clean and Prepare House" as CLN
+    usecase "Check Houses\n--\nextension points\ndead chick found" as CH
+    usecase "Report Dead Chicks" as RD
+    usecase "Log Feed Use" as LF
+    usecase "Monitor Houses by Camera" as MC
+    usecase "Cull Sick Chicks" as CS
+    usecase "Thin Out Flock" as TF
+  }
+  package "Procurement and accounts" {
+    usecase "Order Day-Old Chicks" as OC
+    usecase "Deliver Day-Old Chicks" as DC
+    usecase "Order Feed and Vitamins" as OF
+    usecase "Deliver Feed and Vitamins" as DF
+    usecase "Pay Supplier at Batch End" as PY
+    usecase "Calculate Batch Profit" as CP
+  }
+  package "Slaughter and sales" {
+    usecase "Decide Main Slaughter Date" as DS
+    usecase "Weigh Sample Birds" as WS
+    usecase "Run Main Slaughter" as MS
+    usecase "Pay Slaughter Crew" as PC
+    usecase "Slaughter Client Order" as SC
+    usecase "Arrange Delivery" as AD
+    usecase "Sell Meat" as SM
+    usecase "Sell Meat to Bazaar Agent" as SMBA
+    usecase "Agree Price per kg" as AP
+    usecase "Send Weight Photo by Telegram" as WP
+  }
+  package "Records" {
+    usecase "Write in Notebook" as NB
+    usecase "Record in pDaftar" as PD
+  }
 }
 WK -- RD
 WK -- SC
+DIR -- CLN
 DIR -- RD
 DIR -- LF
 DIR -- MC
 DIR -- CS
 DIR -- TF
-DIR -- CP
-DIR -- CLN
 DIR -- OC
 DIR -- OF
 DIR -- PY
@@ -68,33 +77,33 @@ DIR -- PC
 DIR -- SC
 DIR -- AD
 DIR -- SM
+DIR -- CP
 RD ..> CH : <<extend>>\n{dead chick found}
 RD ..> NB : <<include>>
 LF ..> NB : <<include>>
+DS ..> WS : <<include>>
 PY ..> PD : <<include>>
 PC ..> PD : <<include>>
 AD ..> PD : <<include>>
 SM ..> PD : <<include>>
-DS ..> WS : <<include>>
 SM <|-- SMBA
 SMBA ..> AP : <<include>>
 SMBA ..> WP : <<include>>
+CLC -- CLN
 CSUP -- OC
 CSUP -- DC
 CSUP -- PY
 FSUP -- OF
 FSUP -- DF
 FSUP -- PY
-CREW -- MS
 CREW -- DS
+CREW -- MS
 CREW -- PC
-CLC -- CLN
-BUY -- SM
 BUY -- SC
+BUY -- SM
 BA -- SMBA
 BUY <|-- BA
 BUY <|-- NS
 BUY <|-- SHC
-NB -[hidden]- CH
 CH -- WK
 @enduml
