@@ -21,7 +21,7 @@ rectangle "Nurota Halol Parranda: current operations" {
   usecase "Order Feed and Vitamins" as OF
   usecase "Deliver Feed and Vitamins" as DF
   usecase "Pay Supplier at Batch End" as PY
-  usecase "Calculate Batch Profit" as CP
+  usecase "Calculate Profit" as CP
   usecase "Record in pDaftar" as PD
 }
 DIR -- OC

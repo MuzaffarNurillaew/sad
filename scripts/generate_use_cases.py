@@ -16,25 +16,25 @@ UCS = [
         "Application": "Nurota Halol Parranda: current operations, procurement and accounts (Figure 2.2)",
         "Use Case Name": "Order Day-Old Chicks",
         "Use Case Description": (
-            "The Director orders a new batch of chicks for an empty house from the contracted supplier in Tashkent. Because the contract has the chicks paid for only when the batch ends, the farm is already selling a batch's meat before it has paid for the birds."
+            "The Director orders a new batch of chicks for an empty house from a contracted supplier in Tashkent. Under the contract, the chicks are paid for only when the batch ends, so the birds' meat has normally been sold before the birds are paid for."
         ),
         "Primary Actor": "Director",
         "Secondary Actor(s)": "Chick Supplier",
-        "Precondition": "A supply contract is in place with the chick supplier in Tashkent, with payment due when the batch ends.",
+        "Precondition": "A supply contract is in place with a chick supplier in Tashkent, with payment due when the batch ends.",
         "Postconditions": (
-            "Day-old chicks matching the house's capacity have been delivered by the supplier, and their cost "
-            "is owed to the supplier until the batch ends."
+            "The ordered chicks have been delivered to the farm by the Chick Supplier, and their cost is owed "
+            "to the supplier until the batch ends."
         ),
         "Trigger": "A house has been emptied at the end of its previous batch.",
         "Basic Flow": [
             "The Director confirms that the house has been cleaned and prepared.",
             "The Director sets the order size from the house's 5,000–10,000-bird capacity.",
-            "The Director places the order with the contracted supplier in Tashkent.",
+            "The Director places the order with a contracted supplier in Tashkent.",
             "The Chick Supplier delivers the chicks to the farm by Damas van (includes Deliver Day-Old Chicks).",
         ],
         "Extensions": [
-            "1a. The house is not yet cleaned: the order waits until the Cleaning Crew has finished, then the flow resumes at step 1.",
-            "4a. Some chicks arrive dead, or fewer arrive than ordered: under the contract the Chick Supplier bears the loss, so the Director raises it with the supplier rather than absorbing it. The use case then ends as normal.",
+            "1a. The house is not yet cleaned: the order waits until the Cleaning Crew has finished (see Clean and Prepare House), then the flow resumes at step 1.",
+            "4a. Some chicks arrive dead, or fewer arrive than ordered: the loss is the Chick Supplier's responsibility, not the farm's. The use case then ends as normal.",
         ],
     },
     {
@@ -42,7 +42,7 @@ UCS = [
         "Application": "Nurota Halol Parranda: current operations, slaughter and sales (Figure 2.3)",
         "Use Case Name": "Decide Main Slaughter Date",
         "Use Case Description": (
-            "The Director decides when to call in the slaughter crew. He weighs up the birds' age, the average weight of about ten birds and his own experience. We found no written target weight or age, and the call depends on him alone: nobody else could make it or check it."
+            "The Director decides when to call in the slaughter crew. He weighs up the birds' age, the average weight of about ten birds and his own experience. We found no written target weight or age, so the call rests on his judgement alone."
         ),
         "Primary Actor": "Director",
         "Secondary Actor(s)": "Slaughter Crew",
@@ -56,12 +56,12 @@ UCS = [
         "Trigger": "The batch approaches the end of its 40–50-day growth period.",
         "Basic Flow": [
             "The Director checks the batch's age against its 40–50-day growth period.",
-            "The Director weighs a sample of about ten birds and takes their average (includes Weigh Sample Birds).",
+            "The Director obtains the average weight of a sample of about ten birds (includes Weigh Sample Birds).",
             "The Director judges from the age, the sample average and his experience that the batch is ready.",
             "The Director calls in the hired crew, starting UC-03 Run Main Slaughter.",
         ],
         "Extensions": [
-            "3a. The Director judges the batch not yet ready: he waits three to five more days, which adds days of feed to the batch, and the flow resumes at step 1 with a new sample.",
+            "3a. The Director judges the batch not yet ready: he waits three to five more days, which adds days of feed to the batch and leaves the sale exposed to the market, where he saw the price fall from 27,500 to 23,000 UZS/kg within ten days (section 1). After the wait, the flow resumes at step 4.",
         ],
     },
     {
@@ -69,27 +69,27 @@ UCS = [
         "Application": "Nurota Halol Parranda: current operations, slaughter and sales (Figure 2.3)",
         "Use Case Name": "Run Main Slaughter",
         "Use Case Description": (
-            "A hired crew of about six slaughters and cleans 1,000–1,200 birds in one overnight session, and the Director calls them back as many times as it takes to empty the house. The butcher is paid per head. The count behind that pay is agreed out loud at the end of each session and is not recorded."
+            "In one overnight session, a hired crew of about six slaughters and cleans 1,000–1,200 birds. A house holds 5,000–10,000 birds, so the number of sessions per batch is not fixed. The butcher is paid per head, and the count is made by the butcher himself, the person whose pay depends on it; it is agreed verbally and not written down."
         ),
         "Primary Actor": "Director",
         "Secondary Actor(s)": "Slaughter Crew",
         "Precondition": "The Director has judged the batch ready for slaughter (UC-02 Decide Main Slaughter Date).",
         "Postconditions": (
-            "One session's birds are processed and ready for UC-04, the head count that sets the butcher's "
-            "pay has been agreed verbally, and the crew has been called back for the next session."
+            "One session's birds are processed and ready for sale (Sell Meat), and the head count that sets "
+            "the butcher's pay for that session has been agreed verbally."
         ),
-        "Trigger": "The Director calls in the hired crew, first at the end of UC-02 and then once for each further session.",
+        "Trigger": "The Director calls in the hired crew for one overnight session, first at the end of UC-02 and again while birds remain in the house.",
         "Basic Flow": [
             "The crew arrives for an overnight session.",
             "The butcher kills each bird.",
             "The scalder loosens the feathers in hot water.",
             "The plucker removes the feathers.",
             "Two to three crew workers clean the internal organs.",
-            "The Director and the butcher agree the session's head count verbally.",
-            "The Director calls the crew back for the next session.",
+            "The butcher counts the birds he has killed, the count that sets his pay.",
+            "The Director accepts the butcher's count verbally; it is not written down.",
         ],
         "Extensions": [
-            "7a. No birds remain in the house after the session: the Director does not call the crew back, the batch's slaughter is finished, and the house goes to cleaning before the next order (UC-01). The use case ends.",
+            "7a. No birds remain in the house after the session: the Director does not call the crew back, the batch's slaughter is finished, and the house goes to the Cleaning Crew before the next order (UC-01). The use case ends.",
         ],
     },
     {
@@ -97,26 +97,25 @@ UCS = [
         "Application": "Nurota Halol Parranda: current operations, slaughter and sales (Figure 2.3)",
         "Use Case Name": "Sell Meat to Bazaar Agent",
         "Use Case Description": (
-            "The Bazaar Agent is the farm's largest buyer. As a middleman reselling to seven to nine other sellers, the agent pays only about 26,000 UZS/kg, a little below the bazaar rate. Whoever the Director trusts that day goes to the bazaar, writes down the same weighings as the agent and collects the cash. The farm says the two weight records never disagree, yet only the payment reaches pDaftar; both weight records stay outside it."
+            "The Bazaar Agent is the farm's largest buyer. As a middleman reselling to seven to nine other sellers, the agent pays only about 26,000 UZS/kg, a little below the bazaar rate. Anyone the Director trusts can go to the bazaar as the Trusted Representative, write down the same weighings as the agent and collect the cash. The farm says the two weight records never disagree."
         ),
         "Primary Actor": "Director",
-        "Secondary Actor(s)": "Bazaar Agent",
-        "Precondition": "Meat from a slaughter session (UC-03) is ready for sale.",
+        "Secondary Actor(s)": "Bazaar Agent, Trusted Representative",
+        "Precondition": "A session's meat has been processed (UC-03), and the Director has chosen someone he trusts as the Trusted Representative.",
         "Postconditions": (
             "The agent has paid total kg × the agreed price per kg, and the revenue is recorded in pDaftar."
         ),
-        "Trigger": "A slaughter session finishes and its meat is ready.",
+        "Trigger": "The Director decides to sell the session's meat to the Bazaar Agent, the farm's largest buyer.",
         "Basic Flow": [
-            "The Director and the agent agree that day's price per kg between them, a little below the bazaar rate (includes Agree Price per kg).",
-            "The Director sends the meat to Navoi bazaar with a temporarily hired driver.",
-            "The agent weighs the meat, while a person the Director trusts records the same weighings.",
-            "The agent photographs his kg totals and sends them to the Director on Telegram (includes Send Weight Photo by Telegram).",
-            "The Director checks the photographed totals against the farm's own record.",
-            "The agent pays the total kg × the agreed price per kg in cash to the trusted person at the end of the day.",
+            "The Director and the agent agree that day's price per kg verbally, before the meat leaves, a little below the bazaar rate (includes Agree Price per kg).",
+            "The Director sends the meat to Navoi bazaar with a temporarily hired driver (see Arrange Delivery).",
+            "At the bazaar the agent writes down each weighing, while the Trusted Representative records the same weighings (includes Record Bazaar Weighings).",
+            "The agent photographs the page of weights and sends it to the Director on Telegram (includes Send Weight Photo by Telegram).",
+            "The agent pays the total kg × the agreed price per kg in cash to the Trusted Representative at the end of the day.",
             "The Director records the revenue in pDaftar (Record in pDaftar, which Sell Meat includes).",
         ],
         "Extensions": [
-            "6a. The agent pays by bank transfer instead of cash: the flow resumes at step 7.",
+            "5a. The agent pays by bank transfer instead of cash: the flow resumes at step 6.",
         ],
     },
 ]
@@ -181,7 +180,7 @@ Flag for section 1 (Muzaffar): every 2026-10-24/26 answer used here needs to be 
 Flag for Nodir: sections 4-5 say the agent pays "at" the day's bazaar rate; confirmed answer is "a little below".
 -->
 
-The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale with steps of its own (Figure 2.3). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
+The four use cases follow one batch from buying the chicks to selling the meat. We chose them because each turns on a decision that moves money: what the batch costs (UC-01), when it is slaughtered (UC-02), what slaughtering costs (UC-03) and what the meat earns (UC-04). Feed is ordered on the same contract terms as chicks, so a feed table would repeat UC-01. Selling is shown through the Bazaar Agent, the largest channel and the only sale whose steps our sources document (Figure 2.3). Two of the four decisions rest on nothing more than a spoken agreement: the butcher's head count (UC-03) and the agent's price per kg (UC-04).
 """
 
 TAIL = ""

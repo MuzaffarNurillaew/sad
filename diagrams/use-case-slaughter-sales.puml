@@ -3,21 +3,27 @@
 ' (use-case-rearing, use-case-procurement, use-case-slaughter-sales); all use the identical boundary label.
 ' Rendered with Graphviz dot. Re-render after editing:
 '   java -jar tools/plantuml.jar -tpng diagrams/use-case-slaughter-sales.puml   (needs Graphviz 'dot')
-' Layout: all actors on the left. Buyers on the right put the Buyer -> Sell Meat line beside the
-'   generalisation triangle, which reads ambiguously; the cost is the Bazaar Agent line crossing the title.
+' Layout: actors on the left except the Trusted Representative (`RW -- TR`, `SMBA -- TR`, on the right).
+' No Worker here: who slaughters client orders in-house is not in the sources, so only the Director and Client are linked.
+' Client (small 50-100-bird orders, section 0) is its own actor, not a kind of Buyer, so the Buyer subtypes do not inherit Slaughter Client Order.
+' Buyers on the right put
+'   the Buyer -> Sell Meat line beside the generalisation triangle, which reads ambiguously; the cost is the Bazaar
+'   Agent line crossing the title. An include from Sell Meat to Bazaar Agent to Arrange Delivery scatters the layout,
+'   so UC-04 step 2 describes the driver without naming Arrange Delivery.
 @startuml
 left to right direction
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam defaultFontSize 14
 
-actor "Worker" as WK
 actor "Director" as DIR
 actor "Slaughter Crew" as CREW
+actor "Client" as CL
 actor "Buyer" as BUY
 actor "Bazaar Agent" as BA
 actor "Nurata Seller" as NS
 actor "Shop Customer" as SHC
+actor "Trusted Representative" as TR
 rectangle "Nurota Halol Parranda: current operations" {
   usecase "Decide Main Slaughter Date" as DS
   usecase "Weigh Sample Birds" as WS
@@ -29,9 +35,9 @@ rectangle "Nurota Halol Parranda: current operations" {
   usecase "Sell Meat to Bazaar Agent" as SMBA
   usecase "Agree Price per kg" as AP
   usecase "Send Weight Photo by Telegram" as WP
+  usecase "Record Bazaar Weighings" as RW
   usecase "Record in pDaftar" as PD
 }
-WK -- SC
 DIR -- DS
 DIR -- MS
 DIR -- PC
@@ -45,12 +51,16 @@ SM ..> PD : <<include>>
 SM <|-- SMBA
 SMBA ..> AP : <<include>>
 SMBA ..> WP : <<include>>
+SMBA ..> RW : <<include>>
 CREW -- DS
 CREW -- MS
 CREW -- PC
-BUY -- SC
+CL -- SC
 BUY -- SM
 BA -- SMBA
+BA -- WP
+RW -- TR
+SMBA -- TR
 BUY <|-- BA
 BUY <|-- NS
 BUY <|-- SHC
