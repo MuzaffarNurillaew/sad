@@ -52,6 +52,24 @@ def add_page_number_footer(doc):
     run._r.append(fld_char_end)
 
 
+def add_table_borders(style):
+    # Pandoc's "Table" style has no cell borders, so tables print as loose
+    # text in Word. Give every cell a thin single line.
+    tbl_pr = style.element.find(qn("w:tblPr"))
+    borders = tbl_pr.makeelement(qn("w:tblBorders"), {})
+    for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        borders.append(borders.makeelement(qn(f"w:{edge}"), {
+            qn("w:val"): "single", qn("w:sz"): "4",
+            qn("w:space"): "0", qn("w:color"): "000000",
+        }))
+    # Schema order: tblBorders goes before tblCellMar.
+    cell_mar = tbl_pr.find(qn("w:tblCellMar"))
+    if cell_mar is not None:
+        cell_mar.addprevious(borders)
+    else:
+        tbl_pr.append(borders)
+
+
 def get_style(doc, name):
     # Styles.__contains__ / __getitem__ unreliable across style name casing
     # quirks in pandoc's default template, so match by exact .name instead.
@@ -85,6 +103,10 @@ def main():
     heading1 = get_style(doc, "Heading 1")
     if heading1 is not None:
         heading1.paragraph_format.page_break_before = True
+
+    table = get_style(doc, "Table")
+    if table is not None:
+        add_table_borders(table)
 
     add_page_number_footer(doc)
 
