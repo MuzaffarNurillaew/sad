@@ -20,7 +20,7 @@ SECTIONS := 0-business-case.md \
 
 BUILD := build
 
-.PHONY: all setup reference report check clean distclean
+.PHONY: all setup reference report check detect-ai-text clean distclean
 
 all: report
 
@@ -31,6 +31,12 @@ report: $(BUILD)/report.docx
 # Depends on combined.md so a PlantUML syntax error fails this too.
 check: $(BUILD)/combined.md
 	$(PYTHON) scripts/check_section.py
+
+# Separate, optional heuristic AI-text detector (burstiness + stock phrases).
+# Not part of `check` - unlike the rubric checks, this isn't a reliable
+# pass/fail signal (see scripts/detect_ai_text.py's docstring for why).
+detect-ai-text:
+	$(PYTHON) scripts/detect_ai_text.py
 
 setup: $(PANDOC) $(PLANTUML) .venv/deps-installed
 
@@ -69,7 +75,8 @@ $(BUILD)/combined.md: $(SECTIONS) scripts/render_diagrams.py | setup
 
 $(BUILD)/report.docx: $(BUILD)/combined.md tools/reference.docx
 	$(PANDOC) $(BUILD)/combined.md -o $(BUILD)/report.docx \
-		--reference-doc=tools/reference.docx --toc --toc-depth=2
+		--reference-doc=tools/reference.docx --toc --toc-depth=2 \
+		--resource-path=.:$(BUILD)
 
 # --- Cleanup ---
 

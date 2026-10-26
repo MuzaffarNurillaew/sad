@@ -10,6 +10,7 @@ Usage: .venv/bin/python scripts/render_diagrams.py --out build/combined.md
 """
 import argparse
 import hashlib
+import os
 import re
 import subprocess
 import sys
@@ -59,13 +60,16 @@ def render_diagram(source: str, diagrams_dir: Path, plantuml_jar: Path) -> Path:
     return png_path
 
 
-def process_file(path: Path, diagrams_dir: Path, plantuml_jar: Path, repo_root: Path) -> str:
+def process_file(path: Path, diagrams_dir: Path, plantuml_jar: Path, out_dir: Path) -> str:
     text = path.read_text(encoding="utf-8")
 
     def replace(match: re.Match) -> str:
         png_path = render_diagram(match.group(1), diagrams_dir, plantuml_jar)
-        rel_path = png_path.relative_to(repo_root)
-        return f"![Diagram]({rel_path.as_posix()})\n"
+        # Relative to combined.md's own directory, not the repo root or cwd -
+        # this is what makes the path correct regardless of where a markdown
+        # tool/viewer or pandoc invocation resolves relative images from.
+        rel_path = os.path.relpath(png_path, start=out_dir)
+        return f"![Diagram]({Path(rel_path).as_posix()})\n"
 
     return FENCE_RE.sub(replace, text)
 
@@ -78,12 +82,12 @@ def main():
     parser.add_argument("--plantuml-jar", required=True, type=Path)
     args = parser.parse_args()
 
-    repo_root = Path(__file__).resolve().parent.parent
     diagrams_dir = args.diagrams_dir.resolve()
+    out_dir = args.out.resolve().parent
 
     chunks = []
     for section in args.sections:
-        chunks.append(process_file(section, diagrams_dir, args.plantuml_jar, repo_root))
+        chunks.append(process_file(section, diagrams_dir, args.plantuml_jar, out_dir))
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text("\n\n".join(chunks), encoding="utf-8")

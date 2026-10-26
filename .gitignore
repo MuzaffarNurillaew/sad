@@ -25,4 +25,9 @@ tools/bin/
 tools/plantuml.jar
 tools/reference.docx
 tools/reference-base.docx
+tools/whisper-venv/
 build/
+
+# Interview recordings/derivatives - too large for git, and contain real
+# personal/business data (video, audio, names). Keep local only.
+evidences/
