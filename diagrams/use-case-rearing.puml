@@ -1,0 +1,39 @@
+' Use case diagram for section 2 (2-use-case-diagram.md), part 1 of 3: rearing.
+' The farm's use case diagram is split into three figures by stage of the batch
+' (use-case-rearing, use-case-procurement, use-case-slaughter-sales); all use the identical boundary label.
+' Rendered with Graphviz dot. Re-render after editing:
+'   java -jar tools/plantuml.jar -tpng diagrams/use-case-rearing.puml   (needs Graphviz 'dot')
+' Layout: Director on the left, Worker and Cleaning Crew on the right; with Worker on the left its
+'   line to Check Houses runs along the boundary title.
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontSize 14
+
+actor "Director" as DIR
+rectangle "Nurota Halol Parranda: current operations" {
+  usecase "Clean and Prepare House" as CLN
+  usecase "Check Houses\n--\nextension points\ndead chick found" as CH
+  usecase "Report Dead Chicks" as RD
+  usecase "Log Feed Use" as LF
+  usecase "Monitor Houses by Camera" as MC
+  usecase "Cull Sick Chicks" as CS
+  usecase "Thin Out Flock" as TF
+  usecase "Write in Notebook" as NB
+}
+actor "Worker" as WK
+actor "Cleaning Crew" as CLC
+DIR -- CLN
+DIR -- RD
+DIR -- LF
+DIR -- MC
+DIR -- CS
+DIR -- TF
+RD ..> CH : <<extend>>\n{dead chick found}
+RD ..> NB : <<include>>
+LF ..> NB : <<include>>
+CLN -- CLC
+CH -- WK
+RD -- WK
+@enduml

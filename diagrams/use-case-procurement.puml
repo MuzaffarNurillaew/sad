@@ -1,0 +1,39 @@
+' Use case diagram for section 2 (2-use-case-diagram.md), part 2 of 3: procurement and accounts.
+' The farm's use case diagram is split into three figures by stage of the batch
+' (use-case-rearing, use-case-procurement, use-case-slaughter-sales); all use the identical boundary label.
+' Ovals with a section 3 table carry its number (UC-01..UC-04) for traceability.
+' Rendered with Graphviz dot. Re-render after editing:
+'   java -jar tools/plantuml.jar -tpng diagrams/use-case-procurement.puml   (needs Graphviz 'dot')
+' Layout: all actors on the left; suppliers on the right scatters the lines.
+' Suppliers are not linked to the Deliver use cases directly: each Order includes its Deliver, so the supplier
+'   linked to the Order takes part in the delivery; direct links ran over the boundary title.
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontSize 14
+
+actor "Director" as DIR
+actor "Chick Supplier" as CSUP
+actor "Feed Supplier" as FSUP
+rectangle "Nurota Halol Parranda: current operations" {
+  usecase "UC-01\nOrder Day-Old Chicks" as OC
+  usecase "Deliver Day-Old Chicks" as DC
+  usecase "Order Feed and Vitamins" as OF
+  usecase "Deliver Feed and Vitamins" as DF
+  usecase "Pay Supplier at Batch End" as PY
+  usecase "Calculate Profit" as CP
+  usecase "Record in pDaftar" as PD
+}
+DIR -- OC
+DIR -- OF
+DIR -- PY
+DIR -- CP
+PY ..> PD : <<include>>
+OC ..> DC : <<include>>
+OF ..> DF : <<include>>
+CSUP -- OC
+CSUP -- PY
+FSUP -- OF
+FSUP -- PY
+@enduml
