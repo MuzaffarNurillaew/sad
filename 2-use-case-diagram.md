@@ -16,7 +16,7 @@ pDaftar holds costs, revenue and profit.
 Confirmed by Muzaffar but not (yet) in 0-business-case.md:
 - 2026-10-24: per-kg price with the Bazaar Agent is agreed verbally each time; delivery driver for the meat run is a temporary hire
   arranged by the Director (not an actor); the Director checks the camera app (Monitor Houses by Camera).
-- 2026-10-26 (interview): chicks come only from Tashkent; chicks and feed are bought under contract and paid when
+- 2026-10-25 (interview): chicks come only from Tashkent; chicks and feed are bought under contract and paid when
   each batch ends; the suppliers deliver both; the agent is an independent middleman who pays a little below the bazaar rate;
   readiness is judged on age + random-sample average weight + experience; the number of slaughter sessions per batch is not fixed;
   birds are sold only as meat; amount owed = kg x price, and a second person from the farm also records the bazaar weighings.
