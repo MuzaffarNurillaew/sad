@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmTrack — Nurota Halol Parranda</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <h1>FarmTrack</h1>
+    <div id="whoami" class="whoami hidden">
+      <span id="whoamiText"></span>
+      <button id="logoutBtn" class="link-btn">Log out</button>
+    </div>
+  </header>
+
+  <section id="loginView" class="view">
+    <h2>Log in</h2>
+    <p class="hint">Prototype login — pick a role to see what each one can access.</p>
+    <form id="loginForm">
+      <label>Name<input type="text" id="loginName" placeholder="e.g. Aziz" required></label>
+      <label>Role
+        <select id="loginRole">
+          <option value="worker">Worker</option>
+          <option value="director">Director</option>
+        </select>
+      </label>
+      <button type="submit">Log in</button>
+    </form>
+  </section>
+
+  <section id="dashboardView" class="view hidden">
+    <h2>Houses &amp; batches</h2>
+    <div id="housesList"></div>
+
+    <form id="addHouseForm" class="inline-form">
+      <h3>Add a house (director only, NFR-05)</h3>
+      <input type="text" id="newHouseName" placeholder="House name" required>
+      <button type="submit">Add house</button>
+    </form>
+  </section>
+
+  <section id="batchView" class="view hidden">
+    <button id="backBtn" class="link-btn">&larr; back</button>
+    <h2 id="batchTitle"></h2>
+
+    <div id="profitPanel" class="panel hidden"></div>
+    <div id="profitDenied" class="panel denied hidden">403 — financial figures are director-only (NFR-03)</div>
+
+    <div class="panel">
+      <h3>Mortality (FR-01)</h3>
+      <div id="mortalityList"></div>
+      <form id="mortalityForm" class="inline-form">
+        <input type="text" id="mortalityNote" placeholder="note (optional)">
+        <button type="submit">Log a chick death</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h3>Feed deliveries (FR-02)</h3>
+      <div id="feedList"></div>
+      <form id="feedForm" class="inline-form">
+        <input type="text" id="feedSupplier" placeholder="Supplier" required>
+        <input type="number" id="feedQty" placeholder="Quantity (kg)" required>
+        <input type="number" id="feedCost" placeholder="Cost (UZS)" required>
+        <button type="submit">Log feed delivery</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h3>Slaughter sessions (FR-04)</h3>
+      <div id="slaughterList"></div>
+      <form id="slaughterForm" class="inline-form director-only">
+        <input type="number" id="slaughterHeadcount" placeholder="Crew-reported headcount" required>
+        <input type="number" id="slaughterPay" placeholder="Payment per head (UZS)" required>
+        <button type="submit">Log slaughter session</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h3>Sales &amp; bazaar cross-check (FR-05)</h3>
+      <div id="saleList"></div>
+      <form id="saleForm" class="inline-form director-only">
+        <select id="saleBuyerType">
+          <option value="bazaar">Bazaar agent</option>
+          <option value="individual">Individual buyer</option>
+          <option value="shop">Shop</option>
+        </select>
+        <input type="number" id="saleKg" placeholder="Reported kg" required>
+        <input type="number" id="saleTrustedKg" placeholder="Trusted rep kg (bazaar only)">
+        <input type="number" id="saleRate" placeholder="Bazaar rate UZS/kg (bazaar only)">
+        <button type="submit">Record sale</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

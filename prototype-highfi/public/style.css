@@ -1,0 +1,162 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f2;
+  color: #1c1c1c;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #fff;
+  padding-bottom: 40px;
+}
+
+.topbar {
+  background: #2e5339;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.whoami {
+  font-size: 13px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.view {
+  padding: 16px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.hint {
+  color: #555;
+  font-size: 13px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background: #2e5339;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-top: 8px;
+  padding: 12px;
+}
+
+.link-btn {
+  background: none;
+  color: #2e5339;
+  border: none;
+  width: auto;
+  padding: 0;
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+.topbar .link-btn {
+  color: #fff;
+}
+
+.inline-form {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #ccc;
+}
+
+.panel {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 14px;
+  background: #fafaf8;
+}
+
+.panel.denied {
+  background: #fdecea;
+  border-color: #e0a9a3;
+  color: #7a1f14;
+  font-weight: bold;
+  text-align: center;
+}
+
+.house-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.batch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid #eee;
+}
+
+.batch-row:first-of-type {
+  border-top: none;
+}
+
+.record {
+  font-size: 13px;
+  padding: 6px 0;
+  border-top: 1px solid #eee;
+}
+
+.record:first-child {
+  border-top: none;
+}
+
+.flag {
+  color: #b35900;
+  font-weight: bold;
+}
+
+.mismatch {
+  color: #b00020;
+  font-weight: bold;
+}
+
+.match {
+  color: #2e7d32;
+}
